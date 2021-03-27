@@ -18,7 +18,6 @@ class MarsRoverShould {
 
     @Test
     fun `move forward`() {
-
         val horizontalSize = 5
         val verticalSize = 5
 
@@ -69,8 +68,6 @@ class MarsRoverShould {
 
     private fun willReturnRoverInitialDirection(initialDirection: String) =
         every { scanner.next() } returns initialDirection
-
-
 
     private fun assertRoverExpectedPositionWasPrinted(message: String) {
          verify { printer.println(message) }
