@@ -1,3 +1,5 @@
+package main.kotlin.com.adrrriannn.marsrover
+
 import java.util.Scanner
 
 object MarsRover {

@@ -35,17 +35,7 @@ hs_err_pid*
 /classes/
 !gradle/wrapper/gradle-wrapper.jar
 !infrastructure/**/build/
-payment/build/
-wallapop-commons/build/
-wallapop-cqrs-event-sourcing-spring-boot-starter/build/
-wallapop-notification-firebase-push-client/build/
-wallapop-github-pull-request-merger/build/
-wallapop-smspubli-client/build/
-wallapop-mandrill-mail-sender-client/build/
-wallapop-tapylitics-client/build/
-wallapop-paylivery-commons/build/
-wallapop-mparticle-client/build/
-utils/scripts/build/
+
 
 log/
 artifact_folder/*
@@ -53,17 +43,3 @@ artifact_folder/*
 # Mac .DS_Store file
 */*.DS_Store
 .DS_Store
-
-# /out/ folder
-payment/out/
-wallapop-cqrs-event-sourcing-spring-boot-starter/out/
-wallapop-mandrill-mail-sender-client/out/
-wallapop-paylivery-commons/out/
-wallapop-github-pull-request-merger/out/
-wallapop-mparticle-client/out/
-
-# Python
-venv/
-*.egg-info
-*.pyc
-**/__pycache__/
