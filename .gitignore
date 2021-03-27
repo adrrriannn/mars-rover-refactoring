@@ -43,3 +43,5 @@ artifact_folder/*
 # Mac .DS_Store file
 */*.DS_Store
 .DS_Store
+
+out/

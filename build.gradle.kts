@@ -15,7 +15,7 @@ plugins {
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -27,6 +27,12 @@ dependencies {
 
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
+
+    testImplementation("org.assertj:assertj-core:3.9.0")
+    testImplementation("io.mockk:mockk:1.8.6")
 }
 
 application {

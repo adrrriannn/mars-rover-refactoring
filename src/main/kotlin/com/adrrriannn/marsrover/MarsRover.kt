@@ -1,23 +1,24 @@
 package com.adrrriannn.marsrover
 
+import java.io.PrintStream
 import java.util.Scanner
 
-object MarsRover {
-    @kotlin.jvm.JvmStatic
-    fun main(args: Array<String>) {
-        val reader = Scanner(System.`in`)
-        println("Insert horizontal map size:")
+class MarsRover(private val reader: Scanner,
+                private val printer: PrintStream) {
+
+    operator fun invoke() {
+        printer.println("Insert horizontal map size:")
         val sizex = reader.nextInt()
-        println("Insert vertical map size:")
+        printer.println("Insert vertical map size:")
         val sizey = reader.nextInt()
-        println("Insert horizontal initial rover position:")
+        printer.println("Insert horizontal initial rover position:")
         var roverx = reader.nextInt()
-        println("Insert vertical initial rover position:")
+        printer.println("Insert vertical initial rover position:")
         var rovery = reader.nextInt()
-        println("Insert initial rover direction:")
+        printer.println("Insert initial rover direction:")
         var roverz = reader.next() //n = north, e = east, w = west, s = south
-        do {
-            println("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
+//        do {
+            printer.println("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
             val command = reader.next()
             if (command == "f") {
                 if (roverz == "n") {
@@ -75,7 +76,7 @@ object MarsRover {
                     roverz = "n"
                 }
             }
-            println(String.format("Rover is at x:%d y:%d facing:%s", roverx, rovery, roverz))
-        } while (true)
+            printer.println(String.format("Rover is at x:%d y:%d facing:%s", roverx, rovery, roverz))
+//        } while (true)
     }
 }
