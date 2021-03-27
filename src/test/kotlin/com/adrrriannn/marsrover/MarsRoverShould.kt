@@ -109,7 +109,36 @@ class MarsRoverShould {
         assertRoverExpectedPositionWasPrinted("Rover is at x:0 y:1 facing:w")
     }
 
+    @Test
+    fun `move forward facing south`() {
+        val horizontalSize = 5
+        val verticalSize = 5
 
+        val initialHorizontalPosition = 1
+        val initialVerticalPosition = 1
+        val initialDirection = "s"
+        val command = "f"
+
+        willPrint("Insert horizontal map size:")
+        willPrint("Insert vertical map size:")
+        willPrint("Insert horizontal initial rover position:")
+        willPrint("Insert vertical initial rover position:")
+        willPrint("Insert initial rover direction:")
+        willPrint("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
+        willPrint("Rover is at x:1 y:0 facing:s")
+
+        willReturnHorizontalMapSize(horizontalSize)
+            .willReturnVerticalMapSize(verticalSize)
+            .willReturnRoverInitialHorizontalPosition(initialHorizontalPosition)
+            .willReturnRoverInitialVerticalPosition(initialVerticalPosition)
+
+        willReturnRoverInitialDirection(initialDirection)
+            .willReturnCommand(command)
+
+        marsRover()
+
+        assertRoverExpectedPositionWasPrinted("Rover is at x:1 y:0 facing:s")
+    }
 
     private fun willPrint(message: String) {
         every { printer.println(message) } just Runs
