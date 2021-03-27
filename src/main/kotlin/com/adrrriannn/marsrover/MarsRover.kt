@@ -1,4 +1,4 @@
-package main.kotlin.com.adrrriannn.marsrover
+package com.adrrriannn.marsrover
 
 import java.util.Scanner
 
