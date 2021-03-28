@@ -68,6 +68,7 @@ class MarsRoverShould {
                    "5,5,1,1,e,r,1,1,s",
                    "5,5,1,1,s,r,1,1,w",
                    "5,5,1,1,w,r,1,1,n",
+
                    "5,5,1,1,n,l,1,1,w",
                    "5,5,1,1,e,l,1,1,n",
                    "5,5,1,1,s,l,1,1,e",
@@ -101,68 +102,6 @@ class MarsRoverShould {
         marsRover()
 
         assertRoverExpectedPositionWasPrinted("Rover is at x:$expectedHorizontalPosition y:$expectedVerticalPosition facing:$expectedDirection")
-    }
-
-    @Test
-    fun `rotate right`() {
-        val horizontalSize = 5
-        val verticalSize = 5
-
-        val initialHorizontalPosition = 1
-        val initialVerticalPosition = 1
-        val initialDirection = "n"
-        val command = "r"
-
-        willPrint("Insert horizontal map size:")
-        willPrint("Insert vertical map size:")
-        willPrint("Insert horizontal initial rover position:")
-        willPrint("Insert vertical initial rover position:")
-        willPrint("Insert initial rover direction:")
-        willPrint("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
-        willPrint("Rover is at x:1 y:1 facing:e")
-
-        willReturnHorizontalMapSize(horizontalSize)
-            .willReturnVerticalMapSize(verticalSize)
-            .willReturnRoverInitialHorizontalPosition(initialHorizontalPosition)
-            .willReturnRoverInitialVerticalPosition(initialVerticalPosition)
-
-        willReturnRoverInitialDirection(initialDirection)
-            .willReturnCommand(command)
-
-        marsRover()
-
-        assertRoverExpectedPositionWasPrinted("Rover is at x:1 y:1 facing:e")
-    }
-
-    @Test
-    fun `rotate left`() {
-        val horizontalSize = 5
-        val verticalSize = 5
-
-        val initialHorizontalPosition = 1
-        val initialVerticalPosition = 1
-        val initialDirection = "n"
-        val command = "l"
-
-        willPrint("Insert horizontal map size:")
-        willPrint("Insert vertical map size:")
-        willPrint("Insert horizontal initial rover position:")
-        willPrint("Insert vertical initial rover position:")
-        willPrint("Insert initial rover direction:")
-        willPrint("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
-        willPrint("Rover is at x:1 y:1 facing:w")
-
-        willReturnHorizontalMapSize(horizontalSize)
-            .willReturnVerticalMapSize(verticalSize)
-            .willReturnRoverInitialHorizontalPosition(initialHorizontalPosition)
-            .willReturnRoverInitialVerticalPosition(initialVerticalPosition)
-
-        willReturnRoverInitialDirection(initialDirection)
-            .willReturnCommand(command)
-
-        marsRover()
-
-        assertRoverExpectedPositionWasPrinted("Rover is at x:1 y:1 facing:w")
     }
 
     private fun willPrint(message: String) {
