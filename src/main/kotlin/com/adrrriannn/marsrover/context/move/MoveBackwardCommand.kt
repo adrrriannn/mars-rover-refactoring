@@ -1,7 +1,9 @@
 package com.adrrriannn.marsrover.context.move
 
+import com.adrrriannn.marsrover.context.position.Coordinates
+
 class MoveBackwardCommand {
-    fun move(roverz: String?, rovery: Int, sizey: Int, roverx: Int, sizex: Int): Pair<Int, Int> {
+    fun move(roverz: String?, rovery: Int, sizey: Int, roverx: Int, sizex: Int): Coordinates {
         var rovery1 = rovery
         var roverx1 = roverx
         if (roverz == "n") {
@@ -16,6 +18,6 @@ class MoveBackwardCommand {
         if (roverz == "e") {
             roverx1 = if (roverx1 > 0) roverx1 - 1 else sizex - 1
         }
-        return Pair(roverx1, rovery1)
+        return Coordinates(roverx1, rovery1)
     }
 }

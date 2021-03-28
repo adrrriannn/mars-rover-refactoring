@@ -10,62 +10,62 @@ class MarsRoverConsoleRunner(private val reader: Scanner,
 
     operator fun invoke() {
         printer.println("Insert horizontal map size:")
-        val sizex = reader.nextInt()
+        val mapXSize = reader.nextInt()
         printer.println("Insert vertical map size:")
-        val sizey = reader.nextInt()
+        val mapYSize = reader.nextInt()
         printer.println("Insert horizontal initial rover position:")
-        var roverx = reader.nextInt()
+        var roverInitialPositionX = reader.nextInt()
         printer.println("Insert vertical initial rover position:")
-        var rovery = reader.nextInt()
+        var roverInitialPositionY = reader.nextInt()
         printer.println("Insert initial rover direction:")
-        var roverz = reader.next() //n = north, e = east, w = west, s = south
+        var roverInitialPosition = reader.next() //n = north, e = east, w = west, s = south
 //        do {
             printer.println("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
-            val command = reader.next()
+            val inputCommand = reader.next()
 
-            if (command == "f") {
-                val pair = MoveForwardCommand().move(roverz, rovery, sizey, roverx, sizex)
-                roverx = pair.first
-                rovery = pair.second
+            if (inputCommand == "f") {
+                val coordinates = MoveForwardCommand().move(roverInitialPosition, roverInitialPositionY, mapYSize, roverInitialPositionX, mapXSize)
+                roverInitialPositionX = coordinates.x
+                roverInitialPositionY = coordinates.y
             }
-            if (command == "b") {
-                val pair = MoveBackwardCommand().move(roverz, rovery, sizey, roverx, sizex)
-                roverx = pair.first
-                rovery = pair.second
+            if (inputCommand == "b") {
+                val coordinates = MoveBackwardCommand().move(roverInitialPosition, roverInitialPositionY, mapYSize, roverInitialPositionX, mapXSize)
+                roverInitialPositionX = coordinates.x
+                roverInitialPositionY = coordinates.y
             }
-            if (command == "l") {
-                when (roverz) {
+            if (inputCommand == "l") {
+                when (roverInitialPosition) {
                     "n" -> {
-                        roverz = "w"
+                        roverInitialPosition = "w"
                     }
                     "w" -> {
-                        roverz = "s"
+                        roverInitialPosition = "s"
                     }
                     "s" -> {
-                        roverz = "e"
+                        roverInitialPosition = "e"
                     }
                     "e" -> {
-                        roverz = "n"
+                        roverInitialPosition = "n"
                     }
                 }
             }
-            if (command == "r") {
-                when (roverz) {
+            if (inputCommand == "r") {
+                when (roverInitialPosition) {
                     "n" -> {
-                        roverz = "e"
+                        roverInitialPosition = "e"
                     }
                     "e" -> {
-                        roverz = "s"
+                        roverInitialPosition = "s"
                     }
                     "s" -> {
-                        roverz = "w"
+                        roverInitialPosition = "w"
                     }
                     "w" -> {
-                        roverz = "n"
+                        roverInitialPosition = "n"
                     }
                 }
             }
-            printer.println(String.format("Rover is at x:%d y:%d facing:%s", roverx, rovery, roverz))
+            printer.println(String.format("Rover is at x:%d y:%d facing:%s", roverInitialPositionX, roverInitialPositionY, roverInitialPosition))
 //        } while (true)
     }
 
