@@ -56,6 +56,48 @@ class MarsRoverShould {
         assertRoverExpectedPositionWasPrinted("Rover is at x:$expectedHorizontalPosition y:$expectedVerticalPosition facing:$expectedDirection")
     }
 
+    @ParameterizedTest
+    @CsvSource(value =
+               [
+                   "5,5,1,1,n,r,1,1,e",
+                   "5,5,1,1,e,r,1,1,s",
+                   "5,5,1,1,s,r,1,1,w",
+                   "5,5,1,1,w,r,1,1,n",
+                   "5,5,1,1,n,l,1,1,w",
+                   "5,5,1,1,e,l,1,1,n",
+                   "5,5,1,1,s,l,1,1,e",
+                   "5,5,1,1,w,l,1,1,s"
+               ])
+    fun `rotate`(horizontalSize: Int,
+               verticalSize: Int,
+               initialHorizontalPosition: Int, initialVerticalPosition: Int,
+               initialDirection: String,
+               command: String,
+               expectedHorizontalPosition: Int,
+               expectedVerticalPosition: Int,
+               expectedDirection: String) {
+
+        willPrint("Insert horizontal map size:")
+        willPrint("Insert vertical map size:")
+        willPrint("Insert horizontal initial rover position:")
+        willPrint("Insert vertical initial rover position:")
+        willPrint("Insert initial rover direction:")
+        willPrint("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
+        willPrint("Rover is at x:$expectedHorizontalPosition y:$expectedVerticalPosition facing:$expectedDirection")
+
+        willReturnHorizontalMapSize(horizontalSize)
+            .willReturnVerticalMapSize(verticalSize)
+            .willReturnRoverInitialHorizontalPosition(initialHorizontalPosition)
+            .willReturnRoverInitialVerticalPosition(initialVerticalPosition)
+
+        willReturnRoverInitialDirection(initialDirection)
+            .willReturnCommand(command)
+
+        marsRover()
+
+        assertRoverExpectedPositionWasPrinted("Rover is at x:$expectedHorizontalPosition y:$expectedVerticalPosition facing:$expectedDirection")
+    }
+
     @Test
     fun `rotate right`() {
         val horizontalSize = 5
