@@ -28,11 +28,12 @@ dependencies {
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
 
     testImplementation("org.assertj:assertj-core:3.9.0")
     testImplementation("io.mockk:mockk:1.8.6")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.0")
 }
 
 application {

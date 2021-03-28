@@ -7,6 +7,8 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import java.io.PrintStream
 import java.util.Scanner
 
@@ -16,46 +18,22 @@ class MarsRoverShould {
     private val printer: PrintStream = mockk()
     private val marsRover = MarsRover(scanner, printer)
 
-    @Test
-    fun `move forward facing north`() {
-        val horizontalSize = 5
-        val verticalSize = 5
-
-        val initialHorizontalPosition = 0
-        val initialVerticalPosition = 0
-        val initialDirection = "n"
-        val command = "f"
-
-        willPrint("Insert horizontal map size:")
-        willPrint("Insert vertical map size:")
-        willPrint("Insert horizontal initial rover position:")
-        willPrint("Insert vertical initial rover position:")
-        willPrint("Insert initial rover direction:")
-        willPrint("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
-        willPrint("Rover is at x:0 y:1 facing:n")
-
-        willReturnHorizontalMapSize(horizontalSize)
-        .willReturnVerticalMapSize(verticalSize)
-        .willReturnRoverInitialHorizontalPosition(initialHorizontalPosition)
-        .willReturnRoverInitialVerticalPosition(initialVerticalPosition)
-
-        willReturnRoverInitialDirection(initialDirection)
-        .willReturnCommand(command)
-
-        marsRover()
-
-        assertRoverExpectedPositionWasPrinted("Rover is at x:0 y:1 facing:n")
-    }
-
-    @Test
-    fun `move forward facing east`() {
-        val horizontalSize = 5
-        val verticalSize = 5
-
-        val initialHorizontalPosition = 0
-        val initialVerticalPosition = 0
-        val initialDirection = "e"
-        val command = "f"
+    @ParameterizedTest
+    @CsvSource(value =
+       [
+           "5,5,1,1,n,f,1,2,n",
+           "5,5,1,1,e,f,2,1,e",
+           "5,5,1,1,w,f,0,1,w",
+           "5,5,1,1,s,f,1,0,s"
+       ])
+    fun `move`(horizontalSize: Int,
+               verticalSize: Int,
+               initialHorizontalPosition: Int, initialVerticalPosition: Int,
+               initialDirection: String,
+               command: String,
+               expectedHorizontalPosition: Int,
+               expectedVerticalPosition: Int,
+               expectedDirection: String) {
 
         willPrint("Insert horizontal map size:")
         willPrint("Insert vertical map size:")
@@ -63,7 +41,7 @@ class MarsRoverShould {
         willPrint("Insert vertical initial rover position:")
         willPrint("Insert initial rover direction:")
         willPrint("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
-        willPrint("Rover is at x:1 y:0 facing:e")
+        willPrint("Rover is at x:$expectedHorizontalPosition y:$expectedVerticalPosition facing:$expectedDirection")
 
         willReturnHorizontalMapSize(horizontalSize)
             .willReturnVerticalMapSize(verticalSize)
@@ -75,69 +53,7 @@ class MarsRoverShould {
 
         marsRover()
 
-        assertRoverExpectedPositionWasPrinted("Rover is at x:1 y:0 facing:e")
-    }
-
-    @Test
-    fun `move forward facing west`() {
-        val horizontalSize = 5
-        val verticalSize = 5
-
-        val initialHorizontalPosition = 1
-        val initialVerticalPosition = 1
-        val initialDirection = "w"
-        val command = "f"
-
-        willPrint("Insert horizontal map size:")
-        willPrint("Insert vertical map size:")
-        willPrint("Insert horizontal initial rover position:")
-        willPrint("Insert vertical initial rover position:")
-        willPrint("Insert initial rover direction:")
-        willPrint("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
-        willPrint("Rover is at x:0 y:1 facing:w")
-
-        willReturnHorizontalMapSize(horizontalSize)
-            .willReturnVerticalMapSize(verticalSize)
-            .willReturnRoverInitialHorizontalPosition(initialHorizontalPosition)
-            .willReturnRoverInitialVerticalPosition(initialVerticalPosition)
-
-        willReturnRoverInitialDirection(initialDirection)
-            .willReturnCommand(command)
-
-        marsRover()
-
-        assertRoverExpectedPositionWasPrinted("Rover is at x:0 y:1 facing:w")
-    }
-
-    @Test
-    fun `move forward facing south`() {
-        val horizontalSize = 5
-        val verticalSize = 5
-
-        val initialHorizontalPosition = 1
-        val initialVerticalPosition = 1
-        val initialDirection = "s"
-        val command = "f"
-
-        willPrint("Insert horizontal map size:")
-        willPrint("Insert vertical map size:")
-        willPrint("Insert horizontal initial rover position:")
-        willPrint("Insert vertical initial rover position:")
-        willPrint("Insert initial rover direction:")
-        willPrint("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
-        willPrint("Rover is at x:1 y:0 facing:s")
-
-        willReturnHorizontalMapSize(horizontalSize)
-            .willReturnVerticalMapSize(verticalSize)
-            .willReturnRoverInitialHorizontalPosition(initialHorizontalPosition)
-            .willReturnRoverInitialVerticalPosition(initialVerticalPosition)
-
-        willReturnRoverInitialDirection(initialDirection)
-            .willReturnCommand(command)
-
-        marsRover()
-
-        assertRoverExpectedPositionWasPrinted("Rover is at x:1 y:0 facing:s")
+        assertRoverExpectedPositionWasPrinted("Rover is at x:$expectedHorizontalPosition y:$expectedVerticalPosition facing:$expectedDirection")
     }
 
     @Test
