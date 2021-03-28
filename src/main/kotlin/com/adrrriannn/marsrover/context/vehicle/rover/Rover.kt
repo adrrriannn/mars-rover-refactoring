@@ -10,11 +10,25 @@ import com.adrrriannn.marsrover.context.position.Position
 data class Rover(private val coordinates: Coordinates,
                  private val direction: Direction,
                  private val planet: Planet) {
+    companion object {
+        private val allowedMovements = listOf(Movement.ShiftForward,
+                                              Movement.ShiftBackward,
+                                              Movement.RotateRight,
+                                              Movement.RotateLeft)
+    }
+
     fun currentPosition() = Position(coordinates, direction)
 
     fun move(movement: Movement): Rover {
+        guardMovementIsAllowed(movement)
         val newPosition = MovementCommandFactory(movement)(planet, currentPosition())
         return updatePosition(newPosition)
+    }
+
+    private fun guardMovementIsAllowed(movement: Movement) {
+        if(!allowedMovements.contains(movement)) {
+            throw RuntimeException("Movement not allowed")
+        }
     }
 
     private fun updatePosition(newPosition: Position) = this.copy(coordinates = newPosition.coordinates,

@@ -4,7 +4,6 @@ import com.adrrriannn.marsrover.context.movement.infrastructure.MovementMapper
 import com.adrrriannn.marsrover.context.planet.Mars
 import com.adrrriannn.marsrover.context.position.Coordinates
 import com.adrrriannn.marsrover.context.position.Direction
-import com.adrrriannn.marsrover.context.position.Position
 import com.adrrriannn.marsrover.context.vehicle.rover.Rover
 import java.io.PrintStream
 import java.lang.RuntimeException
@@ -43,16 +42,17 @@ class MarsRoverConsoleRunner(private val reader: Scanner,
 //        } while (true)
     }
 
-    private fun mapDirection(roverInitialDirection: String) =
-        when(roverInitialDirection) {
-            "n" -> Direction.North
-            "s" -> Direction.South
-            "e" -> Direction.East
-            "w" -> Direction.West
-            else -> throw RuntimeException("Invalid direction input")
-        }
 
 }
+
+private fun mapDirection(roverInitialDirection: String) =
+    when(roverInitialDirection) {
+        "n" -> Direction.North
+        "s" -> Direction.South
+        "e" -> Direction.East
+        "w" -> Direction.West
+        else -> throw RuntimeException("Invalid direction input")
+    }
 
 private fun Direction.toConsoleOutput() =
     when(this) {
