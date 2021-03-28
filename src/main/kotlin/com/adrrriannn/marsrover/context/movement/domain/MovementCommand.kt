@@ -1,4 +1,4 @@
-package com.adrrriannn.marsrover.context.movement
+package com.adrrriannn.marsrover.context.movement.domain
 
 import com.adrrriannn.marsrover.context.planet.Planet
 import com.adrrriannn.marsrover.context.position.Position

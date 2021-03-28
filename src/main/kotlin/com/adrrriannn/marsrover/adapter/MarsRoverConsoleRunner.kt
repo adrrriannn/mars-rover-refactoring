@@ -1,9 +1,6 @@
 package com.adrrriannn.marsrover.adapter
 
-import com.adrrriannn.marsrover.context.movement.shift.ShiftBackwardCommand
-import com.adrrriannn.marsrover.context.movement.shift.ShiftForwardCommand
-import com.adrrriannn.marsrover.context.movement.rotate.RotateLeftCommand
-import com.adrrriannn.marsrover.context.movement.rotate.RotateRightCommand
+import com.adrrriannn.marsrover.context.movement.infrastructure.MovementCommandFactory
 import com.adrrriannn.marsrover.context.planet.Mars
 import com.adrrriannn.marsrover.context.position.Coordinates
 import com.adrrriannn.marsrover.context.position.Direction
@@ -31,25 +28,16 @@ class MarsRoverConsoleRunner(private val reader: Scanner,
 
         val coordinates = Coordinates(roverInitialPositionX, roverInitialPositionY)
         val direction = mapDirection(roverInitialDirection)
-        val initialPosition = Position(coordinates, direction)
-        var finalPosition:Position? = null
+        var currentPosition = Position(coordinates, direction)
 //        do {
             printer.println("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
             val inputCommand = reader.next()
 
-            if (inputCommand == "f") {
-                finalPosition = ShiftForwardCommand(planet, initialPosition)
-            }
-            if (inputCommand == "b") {
-                finalPosition = ShiftBackwardCommand(planet, initialPosition)
-            }
-            if (inputCommand == "l") {
-                finalPosition = RotateLeftCommand(planet, initialPosition)
-            }
-            if (inputCommand == "r") {
-                finalPosition = RotateRightCommand(planet, initialPosition)
-            }
-            printer.println(String.format("Rover is at x:%d y:%d facing:%s", finalPosition!!.coordinates.x, finalPosition!!.coordinates.y, finalPosition!!.direction.toConsoleOutput()))
+            val command = MovementCommandFactory(inputCommand)
+
+            currentPosition = command(planet, currentPosition)
+
+            printer.println(String.format("Rover is at x:%d y:%d facing:%s", currentPosition.coordinates.x, currentPosition.coordinates.y, currentPosition.direction.toConsoleOutput()))
 //        } while (true)
     }
 

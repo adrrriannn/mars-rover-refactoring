@@ -1,18 +1,17 @@
-package com.adrrriannn.marsrover.context.movement.rotate
+package com.adrrriannn.marsrover.context.movement.domain.rotate
 
-import com.adrrriannn.marsrover.context.movement.MovementCommand
+import com.adrrriannn.marsrover.context.movement.domain.MovementCommand
 import com.adrrriannn.marsrover.context.planet.Planet
 import com.adrrriannn.marsrover.context.position.Direction
 import com.adrrriannn.marsrover.context.position.Position
 
-object RotateLeftCommand: MovementCommand {
-
+object RotateRightCommand: MovementCommand {
     override fun invoke(planet: Planet, position: Position): Position {
         val newDirection = when (position.direction) {
-            Direction.North -> Direction.West
-            Direction.West  -> Direction.South
-            Direction.South -> Direction.East
-            Direction.East  -> Direction.North
+            Direction.North -> Direction.East
+            Direction.West  -> Direction.North
+            Direction.South -> Direction.West
+            Direction.East  -> Direction.South
         }
         return position.withDirection(newDirection)
     }

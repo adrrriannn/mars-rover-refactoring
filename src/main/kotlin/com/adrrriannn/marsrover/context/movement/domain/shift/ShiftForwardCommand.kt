@@ -1,6 +1,6 @@
-package com.adrrriannn.marsrover.context.movement.shift
+package com.adrrriannn.marsrover.context.movement.domain.shift
 
-import com.adrrriannn.marsrover.context.movement.MovementCommand
+import com.adrrriannn.marsrover.context.movement.domain.MovementCommand
 import com.adrrriannn.marsrover.context.planet.Planet
 import com.adrrriannn.marsrover.context.position.Coordinates
 import com.adrrriannn.marsrover.context.position.Direction
