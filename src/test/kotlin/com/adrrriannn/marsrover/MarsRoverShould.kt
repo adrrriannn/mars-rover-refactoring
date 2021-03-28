@@ -24,7 +24,12 @@ class MarsRoverShould {
            "5,5,1,1,n,f,1,2,n",
            "5,5,1,1,e,f,2,1,e",
            "5,5,1,1,w,f,0,1,w",
-           "5,5,1,1,s,f,1,0,s"
+           "5,5,1,1,s,f,1,0,s",
+
+           "5,5,1,1,n,b,1,0,n",
+           "5,5,1,1,e,b,0,1,e",
+           "5,5,1,1,w,b,2,1,w",
+           "5,5,1,1,s,b,1,2,s"
        ])
     fun `move`(horizontalSize: Int,
                verticalSize: Int,
