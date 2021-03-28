@@ -2,6 +2,10 @@ package com.adrrriannn.marsrover
 
 import java.io.PrintStream
 import java.util.Scanner
+import javax.swing.Spring.height
+
+
+
 
 class MarsRover(private val reader: Scanner,
                 private val printer: PrintStream) {
@@ -20,32 +24,33 @@ class MarsRover(private val reader: Scanner,
 //        do {
             printer.println("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
             val command = reader.next()
+
             if (command == "f") {
                 if (roverz == "n") {
-                    rovery += 1
+                    rovery = (rovery + 1) % sizey
                 }
                 if (roverz == "w") {
-                    roverx -= 1
+                    roverx = if (roverx > 0) roverx - 1 else sizex - 1
                 }
                 if (roverz == "s") {
-                    rovery -= 1
+                    rovery =  if (rovery > 0) rovery - 1 else sizey - 1
                 }
                 if (roverz == "e") {
-                    roverx += 1
+                    roverx = (roverx + 1) % sizex
                 }
             }
             if (command == "b") {
                 if (roverz == "n") {
-                    rovery -= 1
+                    rovery = if (rovery > 0) rovery - 1 else sizey - 1
                 }
                 if (roverz == "w") {
-                    roverx += 1
+                    roverx = (roverx + 1) % sizex
                 }
                 if (roverz == "s") {
-                    rovery += 1
+                    rovery = (rovery + 1) % sizey
                 }
                 if (roverz == "e") {
-                    roverx -= 1
+                    roverx = if (roverx > 0) roverx - 1 else sizex - 1
                 }
             }
             if (command == "l") {

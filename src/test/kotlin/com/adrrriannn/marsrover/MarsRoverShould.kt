@@ -64,6 +64,49 @@ class MarsRoverShould {
     @ParameterizedTest
     @CsvSource(value =
                [
+                   "5,5,4,4,n,f,4,0,n",
+                   "5,5,4,4,e,f,0,4,e",
+                   "5,5,0,0,w,f,4,0,w",
+                   "5,5,0,0,s,f,0,4,s",
+
+                   "5,5,0,0,n,b,0,4,n",
+                   "5,5,0,0,e,b,4,0,e",
+                   "5,5,4,4,w,b,0,4,w",
+                   "5,5,4,4,s,b,4,0,s"
+               ])
+    fun `move over the horizon`(horizontalSize: Int,
+               verticalSize: Int,
+               initialHorizontalPosition: Int, initialVerticalPosition: Int,
+               initialDirection: String,
+               command: String,
+               expectedHorizontalPosition: Int,
+               expectedVerticalPosition: Int,
+               expectedDirection: String) {
+
+        willPrint("Insert horizontal map size:")
+        willPrint("Insert vertical map size:")
+        willPrint("Insert horizontal initial rover position:")
+        willPrint("Insert vertical initial rover position:")
+        willPrint("Insert initial rover direction:")
+        willPrint("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
+        willPrint("Rover is at x:$expectedHorizontalPosition y:$expectedVerticalPosition facing:$expectedDirection")
+
+        willReturnHorizontalMapSize(horizontalSize)
+            .willReturnVerticalMapSize(verticalSize)
+            .willReturnRoverInitialHorizontalPosition(initialHorizontalPosition)
+            .willReturnRoverInitialVerticalPosition(initialVerticalPosition)
+
+        willReturnRoverInitialDirection(initialDirection)
+            .willReturnCommand(command)
+
+        marsRover()
+
+        assertRoverExpectedPositionWasPrinted("Rover is at x:$expectedHorizontalPosition y:$expectedVerticalPosition facing:$expectedDirection")
+    }
+
+    @ParameterizedTest
+    @CsvSource(value =
+               [
                    "5,5,1,1,n,r,1,1,e",
                    "5,5,1,1,e,r,1,1,s",
                    "5,5,1,1,s,r,1,1,w",
