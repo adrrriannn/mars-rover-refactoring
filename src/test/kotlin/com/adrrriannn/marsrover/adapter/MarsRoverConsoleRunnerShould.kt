@@ -1,4 +1,4 @@
-package com.adrrriannn.marsrover
+package com.adrrriannn.marsrover.adapter
 
 import com.adrrriannn.marsrover.adapter.MarsRoverConsoleRunner
 import io.mockk.MockKAdditionalAnswerScope

@@ -1,10 +1,11 @@
 package com.adrrriannn.marsrover.adapter
 
-import com.adrrriannn.marsrover.context.movement.infrastructure.MovementCommandFactory
+import com.adrrriannn.marsrover.context.movement.infrastructure.MovementMapper
 import com.adrrriannn.marsrover.context.planet.Mars
 import com.adrrriannn.marsrover.context.position.Coordinates
 import com.adrrriannn.marsrover.context.position.Direction
 import com.adrrriannn.marsrover.context.position.Position
+import com.adrrriannn.marsrover.context.vehicle.rover.Rover
 import java.io.PrintStream
 import java.lang.RuntimeException
 import java.util.Scanner
@@ -28,16 +29,17 @@ class MarsRoverConsoleRunner(private val reader: Scanner,
 
         val coordinates = Coordinates(roverInitialPositionX, roverInitialPositionY)
         val direction = mapDirection(roverInitialDirection)
-        var currentPosition = Position(coordinates, direction)
+
+        var rover = Rover(coordinates, direction, planet)
 //        do {
             printer.println("Insert command (f = forward, b = backward, l = turn left, r = turn right):")
             val inputCommand = reader.next()
 
-            val command = MovementCommandFactory(inputCommand)
+            val movement = MovementMapper(inputCommand)
 
-            currentPosition = command(planet, currentPosition)
+            rover = rover.move(movement)
 
-            printer.println(String.format("Rover is at x:%d y:%d facing:%s", currentPosition.coordinates.x, currentPosition.coordinates.y, currentPosition.direction.toConsoleOutput()))
+            printer.println(String.format("Rover is at x:%d y:%d facing:%s", rover.currentPosition().coordinates.x, rover.currentPosition().coordinates.y, rover.currentPosition().direction.toConsoleOutput()))
 //        } while (true)
     }
 
