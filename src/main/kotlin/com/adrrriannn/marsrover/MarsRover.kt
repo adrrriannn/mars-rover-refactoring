@@ -49,31 +49,35 @@ class MarsRover(private val reader: Scanner,
                 }
             }
             if (command == "l") {
-                if (roverz == "n") {
-                    roverz = "w"
-                }
-                if (roverz == "w") {
-                    roverz = "s"
-                }
-                if (roverz == "s") {
-                    roverz = "e"
-                }
-                if (roverz == "e") {
-                    roverz = "n"
+                when (roverz) {
+                    "n" -> {
+                        roverz = "w"
+                    }
+                    "w" -> {
+                        roverz = "s"
+                    }
+                    "s" -> {
+                        roverz = "e"
+                    }
+                    "e" -> {
+                        roverz = "n"
+                    }
                 }
             }
             if (command == "r") {
-                if (roverz == "n") {
-                    roverz = "e"
-                }
-                if (roverz == "e") {
-                    roverz = "s"
-                }
-                if (roverz == "s") {
-                    roverz = "w"
-                }
-                if (roverz == "w") {
-                    roverz = "n"
+                when (roverz) {
+                    "n" -> {
+                        roverz = "e"
+                    }
+                    "e" -> {
+                        roverz = "s"
+                    }
+                    "s" -> {
+                        roverz = "w"
+                    }
+                    "w" -> {
+                        roverz = "n"
+                    }
                 }
             }
             printer.println(String.format("Rover is at x:%d y:%d facing:%s", roverx, rovery, roverz))
