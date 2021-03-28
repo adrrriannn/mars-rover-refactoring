@@ -1,22 +1,22 @@
 package com.adrrriannn.marsrover
 
+import com.adrrriannn.marsrover.adapter.MarsRoverConsoleRunner
 import io.mockk.MockKAdditionalAnswerScope
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.io.PrintStream
 import java.util.Scanner
 
-class MarsRoverShould {
+class MarsRoverConsoleRunnerShould {
 
     private val scanner: Scanner = mockk()
     private val printer: PrintStream = mockk()
-    private val marsRover = MarsRover(scanner, printer)
+    private val marsRover = MarsRoverConsoleRunner(scanner, printer)
 
     @ParameterizedTest
     @CsvSource(value =

@@ -1,14 +1,12 @@
-package com.adrrriannn.marsrover
+package com.adrrriannn.marsrover.adapter
 
+import com.adrrriannn.marsrover.context.move.MoveBackwardCommand
+import com.adrrriannn.marsrover.context.move.MoveForwardCommand
 import java.io.PrintStream
 import java.util.Scanner
-import javax.swing.Spring.height
 
-
-
-
-class MarsRover(private val reader: Scanner,
-                private val printer: PrintStream) {
+class MarsRoverConsoleRunner(private val reader: Scanner,
+                             private val printer: PrintStream) {
 
     operator fun invoke() {
         printer.println("Insert horizontal map size:")
@@ -26,32 +24,14 @@ class MarsRover(private val reader: Scanner,
             val command = reader.next()
 
             if (command == "f") {
-                if (roverz == "n") {
-                    rovery = (rovery + 1) % sizey
-                }
-                if (roverz == "w") {
-                    roverx = if (roverx > 0) roverx - 1 else sizex - 1
-                }
-                if (roverz == "s") {
-                    rovery =  if (rovery > 0) rovery - 1 else sizey - 1
-                }
-                if (roverz == "e") {
-                    roverx = (roverx + 1) % sizex
-                }
+                val pair = MoveForwardCommand().move(roverz, rovery, sizey, roverx, sizex)
+                roverx = pair.first
+                rovery = pair.second
             }
             if (command == "b") {
-                if (roverz == "n") {
-                    rovery = if (rovery > 0) rovery - 1 else sizey - 1
-                }
-                if (roverz == "w") {
-                    roverx = (roverx + 1) % sizex
-                }
-                if (roverz == "s") {
-                    rovery = (rovery + 1) % sizey
-                }
-                if (roverz == "e") {
-                    roverx = if (roverx > 0) roverx - 1 else sizex - 1
-                }
+                val pair = MoveBackwardCommand().move(roverz, rovery, sizey, roverx, sizex)
+                roverx = pair.first
+                rovery = pair.second
             }
             if (command == "l") {
                 when (roverz) {
@@ -88,4 +68,5 @@ class MarsRover(private val reader: Scanner,
             printer.println(String.format("Rover is at x:%d y:%d facing:%s", roverx, rovery, roverz))
 //        } while (true)
     }
+
 }
